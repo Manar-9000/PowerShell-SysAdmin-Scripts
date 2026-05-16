@@ -1,7 +1,5 @@
 # PowerShell-SysAdmin-Scripts
-
-
-# PowerShell-SysAdmin-Scripts
+---
 
 A collection of real-world PowerShell automation scripts for Windows Server 2022 
 system administration tasks. All scripts were written, tested, and verified in a 
