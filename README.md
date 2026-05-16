@@ -60,7 +60,7 @@ cd C:\Scripts
 The ingredient list — a structured spreadsheet telling the script who to create 
 and where to put them in Active Directory.
 
-<img src="bulk_users_csv_created.png" width="550" alt="C:\Scripts folder showing the users_template.csv file">
+<img src="Bulk_users_csv_created.png" width="550" alt="C:\Scripts folder showing the users_template.csv file">
 
 ---
 
@@ -69,7 +69,7 @@ Before running any script, Windows requires explicit permission to execute `.ps1
 files. `RemoteSigned` allows locally written scripts to run freely while still 
 blocking untrusted scripts downloaded from the internet.
 
-<img src="bulk_users_execution_policy.png" width="550" alt="PowerShell execution policy change confirmation">
+<img src="Bulk_users_execution_policy.png" width="550" alt="PowerShell execution policy change confirmation">
 
 ---
 
