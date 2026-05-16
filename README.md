@@ -6,7 +6,7 @@ system administration tasks. All scripts were written, tested, and verified in a
 live Active Directory environment (`manar.local`) running on Windows Server 2022.
 
 These scripts demonstrate the shift from manual point-and-click administration 
-to scalable, repeatable automation — a core skill for any sysadmin role.
+to scalable, repeatable automation, a core skill for any sysadmin role.
 
 ---
 
@@ -35,7 +35,7 @@ reads a CSV spreadsheet and automatically creates all accounts in seconds.
 **Real-World Use Case:**
 HR provides a spreadsheet of 20 new hires starting Monday. Instead of spending 
 2 hours clicking through Active Directory Users and Computers, the sysadmin drops 
-the CSV in a folder and runs this script — all accounts exist in under 10 seconds.
+the CSV in a folder and runs this script, all accounts exist in under 10 seconds.
 
 **What It Does:**
 - Reads user data from a structured CSV file (name, username, department, OU)
@@ -57,7 +57,7 @@ cd C:\Scripts
 ---
 
 ### Step 1: CSV File Created
-The ingredient list — a structured spreadsheet telling the script who to create 
+The ingredient list a structured spreadsheet telling the script who to create 
 and where to put them in Active Directory.
 
 <img src="Bulk_users_csv_created.png" width="550" alt="C:\Scripts folder showing the users_template.csv file">
@@ -89,7 +89,7 @@ all 4 users were created with zero errors.
 The output shows:
 - Script found **4 users** in the CSV
 - Each account was created and confirmed in real time
-- No red error text — clean execution throughout
+- No red error text. Clean execution throughout
 
 ---
 
