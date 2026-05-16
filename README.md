@@ -69,7 +69,7 @@ Before running any script, Windows requires explicit permission to execute `.ps1
 files. `RemoteSigned` allows locally written scripts to run freely while still 
 blocking untrusted scripts downloaded from the internet.
 
-<img src="Bulk_users_execution_policy.png" width="550" alt="PowerShell execution policy change confirmation">
+<img src="Bulk_users_executon_policy.png" width="550" alt="PowerShell execution policy change confirmation">
 
 ---
 
@@ -84,7 +84,7 @@ Both files confirmed in `C:\Scripts` on the Domain Controller and ready to execu
 Running `.\New-BulkADUsers.ps1` from the Scripts folder. The terminal confirms 
 all 4 users were created with zero errors.
 
-<img src="bulk_users_script_success.png" width="550" alt="PowerShell terminal showing green success output for all 4 created users">
+<img src="bulk_users_scripts_success.png" width="550" alt="PowerShell terminal showing green success output for all 4 created users">
 
 The output shows:
 - Script found **4 users** in the CSV
