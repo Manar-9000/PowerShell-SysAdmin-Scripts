@@ -60,7 +60,7 @@ cd C:\Scripts
 The ingredient list a structured spreadsheet telling the script who to create 
 and where to put them in Active Directory.
 
-<img src="Bulk_users_csv_created.png" width="550" alt="C:\Scripts folder showing the users_template.csv file">
+<img src="Images/Bulk_users_csv_created.png" width="550" alt="C:\Scripts folder showing the users_template.csv file">
 
 ---
 
@@ -69,14 +69,14 @@ Before running any script, Windows requires explicit permission to execute `.ps1
 files. `RemoteSigned` allows locally written scripts to run freely while still 
 blocking untrusted scripts downloaded from the internet.
 
-<img src="Bulk_users_executon_policy.png" width="550" alt="PowerShell execution policy change confirmation">
+<img src="Images/Bulk_users_executon_policy.png" width="550" alt="PowerShell execution policy change confirmation">
 
 ---
 
 ### Step 3: Script & CSV in Place
 Both files confirmed in `C:\Scripts` on the Domain Controller and ready to execute.
 
-<img src="bulk_users_scripts_folder.png" width="550" alt="C:\Scripts folder showing both New-BulkADUsers.ps1 and users_template.csv">
+<img src="Images/bulk_users_scripts_folder.png" width="550" alt="C:\Scripts folder showing both New-BulkADUsers.ps1 and users_template.csv">
 
 ---
 
@@ -84,7 +84,7 @@ Both files confirmed in `C:\Scripts` on the Domain Controller and ready to execu
 Running `.\New-BulkADUsers.ps1` from the Scripts folder. The terminal confirms 
 all 4 users were created with zero errors.
 
-<img src="bulk_users_scripts_success.png" width="550" alt="PowerShell terminal showing green success output for all 4 created users">
+<img src="Images/bulk_users_scripts_success.png" width="550" alt="PowerShell terminal showing green success output for all 4 created users">
 
 The output shows:
 - Script found **4 users** in the CSV
@@ -98,7 +98,7 @@ Final verification in **Active Directory Users and Computers** confirms all 4
 users (John Smith, Sara Jones, Mike Brown, Emily Davis) now exist in the 
 `MANAR_Users` OU exactly where the script placed them.
 
-<img src="bulk_users_ad_verification.png" width="550" alt="Active Directory Users and Computers showing all 4 new users in the MANAR_Users OU">
+<img src="Images/bulk_users_ad_verification.png" width="550" alt="Active Directory Users and Computers showing all 4 new users in the MANAR_Users OU">
 
 **Script Status: WORKING**
 
@@ -150,7 +150,7 @@ cd C:\Scripts
 ### Step 1: Script in Place
 `Get-LockedAccounts.ps1` saved to `C:\Scripts` alongside the existing scripts.
 
-<img src="locked_checker_scripts_folder.png" width="550" alt="C:\Scripts folder showing Get-LockedAccounts.ps1, New-BulkADUsers.ps1 and users_template.csv">
+<img src="Images/locked_checker_scripts_folder.png" width="550" alt="C:\Scripts folder showing Get-LockedAccounts.ps1, New-BulkADUsers.ps1 and users_template.csv">
 
 ---
 
@@ -158,7 +158,7 @@ cd C:\Scripts
 First run of the script confirms the domain is healthy. All user accounts 
 are active and accessible. This is what a normal morning looks like.
 
-<img src="locked_checker_clean.png" width="550" alt="PowerShell terminal showing green No locked accounts found message">
+<img src="Images/locked_checker_clean.png" width="550" alt="PowerShell terminal showing green No locked accounts found message">
 
 ---
 
@@ -167,7 +167,7 @@ To demonstrate the detection capability, the `jdoe` account was deliberately
 locked by entering incorrect credentials 5 times on the Windows 11 client. 
 Running the script immediately flagged the account.
 
-<img src="locked_checker_detected.png" width="550" alt="PowerShell terminal showing jdoe detected as locked with 5 bad attempts in red">
+<img src="Images/locked_checker_detected.png" width="550" alt="PowerShell terminal showing jdoe detected as locked with 5 bad attempts in red">
 
 The script identified:
 - **Username:** `jdoe`
@@ -189,7 +189,7 @@ Rather than navigating through the GUI, the account was unlocked directly
 from the terminal using a single command. A blank line with a new prompt 
 returned — PowerShell's way of confirming silent success.
 
-<img src="locked_checker_unlocked.png" width="550" alt="PowerShell terminal showing Unlock-ADAccount command executed with no errors">
+<img src="Images/locked_checker_unlocked.png" width="550" alt="PowerShell terminal showing Unlock-ADAccount command executed with no errors">
 
 ```powershell
 Unlock-ADAccount -Identity jdoe
