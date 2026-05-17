@@ -112,3 +112,106 @@ users (John Smith, Sara Jones, Mike Brown, Emily Davis) now exist in the
 - Organizational Unit targeting via Distinguished Names (DN)
 - Execution Policy management
 - Proactive verification of script results
+
+
+---
+
+### 2. Locked Account Checker
+**File:** `Locked-Account-Checker/Get-LockedAccounts.ps1`
+
+**The Problem It Solves:**
+Every morning help desk teams get flooded with "I can't log in" tickets. 
+Manually hunting through Active Directory Users and Computers to find locked 
+accounts one by one is slow and reactive. This script scans the entire domain 
+instantly and reports every locked account with full details — before users 
+even call in.
+
+**Real-World Use Case:**
+A sysadmin runs this script at the start of every shift. Instead of waiting 
+for the phone to ring, they already know who is locked, how many bad attempts 
+were made, and can proactively reach out to affected users. 5 bad attempts at 
+9am means a forgotten password. 50 attempts at 3am means something else entirely.
+
+**What It Does:**
+- Scans all Active Directory user accounts domain-wide
+- Filters and reports only locked accounts
+- Displays username, full name, bad logon attempt count, and lockout status
+- Reports a clean bill of health if no accounts are locked
+- Reminds the admin of the exact command to remediate each account
+
+**How To Run:**
+```powershell
+cd C:\Scripts
+.\Get-LockedAccounts.ps1
+```
+
+---
+
+### Step 1: Script in Place
+`Get-LockedAccounts.ps1` saved to `C:\Scripts` alongside the existing scripts.
+
+<img src="locked_checker_scripts_folder.png" width="550" alt="C:\Scripts folder showing Get-LockedAccounts.ps1, New-BulkADUsers.ps1 and users_template.csv">
+
+---
+
+### Step 2: Clean State — No Locked Accounts
+First run of the script confirms the domain is healthy. All user accounts 
+are active and accessible. This is what a normal morning looks like.
+
+<img src="locked_checker_clean.png" width="550" alt="PowerShell terminal showing green No locked accounts found message">
+
+---
+
+### Step 3: Lockout Detected — Live Threat Identified
+To demonstrate the detection capability, the `jdoe` account was deliberately 
+locked by entering incorrect credentials 5 times on the Windows 11 client. 
+Running the script immediately flagged the account.
+
+<img src="locked_checker_detected.png" width="550" alt="PowerShell terminal showing jdoe detected as locked with 5 bad attempts in red">
+
+The script identified:
+- **Username:** `jdoe`
+- **Full Name:** John Doe
+- **Bad Attempts:** 5
+- **Locked Out:** True
+
+It also provided the exact remediation command at the bottom, making this 
+a complete detection AND guidance tool.
+
+**Note:** This is the same `jdoe` account from Ticket #2 in the 
+Troubleshooting-Lab — demonstrating how scripted tools and help desk 
+tickets connect in a real environment.
+
+---
+
+### Step 4: Account Remediated via PowerShell
+Rather than navigating through the GUI, the account was unlocked directly 
+from the terminal using a single command. A blank line with a new prompt 
+returned — PowerShell's way of confirming silent success.
+
+<img src="locked_checker_unlocked.png" width="550" alt="PowerShell terminal showing Unlock-ADAccount command executed with no errors">
+
+```powershell
+Unlock-ADAccount -Identity jdoe
+```
+
+The script was then run a final time to confirm the domain returned to a 
+clean state with no locked accounts remaining.
+
+**Script Status: WORKING**
+
+---
+
+## GUI vs PowerShell — Why This Matters
+
+| | GUI (ADUC) | PowerShell |
+| :--- | :--- | :--- |
+| **Speed** | 6-8 clicks per user | 1 command per user |
+| **Scale** | Manual, one at a time | Loop through 50 users in seconds |
+| **Remote** | Requires GUI access to server | Runs from any machine with RSAT |
+| **Auditing** | No automatic record | Output can be logged to a file |
+| **Scheduling** | Cannot be scheduled | Can run automatically every morning |
+
+In small environments the GUI is common. In enterprise environments 
+PowerShell is expected — volume, remote access, and auditability make 
+it the professional standard.
