@@ -123,7 +123,7 @@ users (John Smith, Sara Jones, Mike Brown, Emily Davis) now exist in the
 Every morning help desk teams get flooded with "I can't log in" tickets. 
 Manually hunting through Active Directory Users and Computers to find locked 
 accounts one by one is slow and reactive. This script scans the entire domain 
-instantly and reports every locked account with full details — before users 
+instantly and reports every locked account with full details before users 
 even call in.
 
 **Real-World Use Case:**
@@ -179,7 +179,7 @@ It also provided the exact remediation command at the bottom, making this
 a complete detection AND guidance tool.
 
 **Note:** This is the same `jdoe` account from Ticket #2 in the 
-Troubleshooting-Lab — demonstrating how scripted tools and help desk 
+Troubleshooting-Lab, demonstrating how scripted tools and help desk 
 tickets connect in a real environment.
 
 ---
@@ -187,7 +187,7 @@ tickets connect in a real environment.
 ### Step 4: Account Remediated via PowerShell
 Rather than navigating through the GUI, the account was unlocked directly 
 from the terminal using a single command. A blank line with a new prompt 
-returned — PowerShell's way of confirming silent success.
+returned, PowerShell's way of confirming silent success.
 
 <img src="Images/locked_checker_unlocked.png" width="550" alt="PowerShell terminal showing Unlock-ADAccount command executed with no errors">
 
@@ -213,5 +213,74 @@ clean state with no locked accounts remaining.
 | **Scheduling** | Cannot be scheduled | Can run automatically every morning |
 
 In small environments the GUI is common. In enterprise environments 
-PowerShell is expected — volume, remote access, and auditability make 
+PowerShell is expected volume, remote access, and auditability make 
 it the professional standard.
+
+---
+
+### 3. System Information Report
+**File:** `System-Info-Report/Get-SystemInfo.ps1`
+
+**The Problem It Solves:**
+Every help desk call starts the same way — "what's your computer name? 
+What version of Windows? When did you last restart?" Users never know 
+the answers. This script instantly pulls all critical system information 
+into a clean, readable report in seconds.
+
+**Real-World Use Case:**
+A technician runs this script at the start of a support session to 
+immediately know the machine's full profile: hostname, OS version, 
+IP address, uptime, and available memory without asking the user 
+anything. In larger environments this same script can be run remotely 
+across hundreds of machines to build a full hardware and software 
+inventory of every device on the network.
+
+**What It Does:**
+- Pulls the machine hostname and OS name and build number
+- Identifies the current logged in user
+- Retrieves the active IPv4 address (filters out loopback automatically)
+- Calculates system uptime from last boot time to right now
+- Reports total and free RAM in GB
+- Runs on any Windows machine: Server or Workstation and no AD required
+
+**How To Run:**
+```powershell
+cd C:\Scripts
+.\Get-SystemInfo.ps1
+```
+
+---
+
+### Step 1: Script Executed on Domain Controller
+Running the script on the Windows Server 2022 Domain Controller 
+produces a full system profile pulled entirely from WMI in seconds.
+
+<img src="Images/sysinfo_server.png" width="550" alt="PowerShell terminal showing full system info report on Windows Server 2022">
+
+The report confirms:
+- **Hostname:** `WIN-821SIA1ORE2` — the Domain Controller
+- **OS:** Microsoft Windows Server 2022 Standard Evaluation
+- **OS Build:** 20348
+- **Current User:** Administrator
+- **IP Address:** `192.168.211.10` — the static DC address configured in Phase 1
+- **Last Boot:** 05/16/2026 09:32:38
+- **Uptime:** 10 hours 11 minutes
+- **Total RAM:** 4 GB allocated to this VM
+- **Free RAM:** 2.17 GB currently available
+
+**Script Status: WORKING **
+
+---
+
+## Skills Demonstrated
+- PowerShell scripting for Active Directory automation
+- Bulk user account creation from CSV data ingestion
+- `New-ADUser` cmdlet with full parameter configuration
+- `Search-ADAccount` for proactive domain-wide lockout detection
+- `Get-ComputerInfo` and `Get-CimInstance` for WMI system queries
+- `Get-NetIPAddress` with `Where-Object` filtering
+- SecureString password handling
+- Distinguished Name (DN) and OU path construction
+- Date and memory unit arithmetic in PowerShell
+- Execution Policy management
+- Proactive vs reactive IT administration mindset
